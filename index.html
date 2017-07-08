@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="swiper/dist/css/swiper.min.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+
+	<script src="swiper/dist/js/swiper.min.js"></script>
+	<style>
+	/*swiper*/
+	html, body {
+        position: relative;
+        height: 100%;
+        perspective:1000px;
+
+    }
+    body {
+        background: #fff;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+		background:radial-gradient(circle,red,pink,blue);
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        font-size: 18px;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 30px;
+    }
+    .swiper-slide p{
+		color:#fff;
+		font-weight:700;
+    }
+    /*3d骰子*/
+	.rotate{
+			width:600px;
+			height:600px;
+			margin:0 auto;
+			position:relative;
+			transform-style:preserve-3d;
+			perspective-origin:50% 50%;
+			transition:all 15s ease;
+			animation:zhuan 10s linear 0s infinite normal;
+		}
+		@keyframes zhuan{
+			0%{transform:rotateY(36deg)}
+			20%{transform:rotateX(50deg)}
+			30%{transform:rotateZ(80deg)}
+			40%{transform:rotateY(100deg)}
+			50%{transform:rotateX(150deg)}
+			60%{transform:rotateZ(200deg)}
+			70%{transform:rotateX(220deg)}
+			80%{transform:rotateX(260deg)}
+			90%{transform:rotateY(300deg)}
+			100%{transform:rotateZ(360deg)}
+		}
+		.rotate>div{
+			width:300px;
+			height:300px;
+			background:rgba(249,109,57,1);
+			position:absolute;
+			left:150px;
+			top:150px;
+			border:1px solid black;
+			font-size:40px;
+			text-align:center;
+			line-height:300px;
+		}
+		.div1{
+			transform:translateZ(150px);
+		}
+		.div2{
+			transform:rotateX(180deg) translateZ(150px);
+		}
+		.div3{
+			transform:rotateX(90deg) translateZ(150px);
+		}
+		.div4{
+			transform:rotateX(-90deg) translateZ(150px);
+		}
+		.div5{
+			transform:rotateY(90deg) translateZ(150px);
+		}
+		.div6{
+			transform:rotateY(-90deg) translateZ(150px);
+		}
+	</style>
+</head>
+<body>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <p class="ani bounceInLeft">左边进入</p>
+                <p class="ani bounceInDown">下面进入</p>
+                <p class="ani bounceInRight">右面进入</p>
+                <p class="ani bounceInUp">上面进入</p>
+                <p class="ani flash">闪亮</p>
+                <p class="ani shake">摇动</p>
+                <p class="ani flip">翻转</p>
+                <p class="ani lightSpeedIn">移动进入</p>        
+            </div>
+        </div>
+        <!-- Add Scroll Bar -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+
+	<div class="rotate">
+		<div class="div1">(*￣▽￣*)</div>
+		<div class="div2">(≧∇≦)ﾉ</div>
+		<div class="div3">\(^o^)/</div>
+		<div class="div4">~~~~(>_<)~~~~</div>
+		<div class="div5">(ಥ _ ಥ)</div>
+		<div class="div6">(,,• ₃ •,,)</div>
+	</div>
+
+
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+	        scrollbar: '.swiper-scrollbar',
+	        direction: 'vertical',
+	        slidesPerView: 'auto',
+	        mousewheelControl: true,
+	        freeMode: true,
+			freeModeMomentumRatio : 2,
+	    });
+	   var anis = swiper.slides[0].querySelectorAll('.ani');
+	   for(i=0;i<anis.length;i++){
+		   anis[i].style.visibility ='hidden' ;
+		   anis[i].classCache=anis[i].className;
+		   anis[i].className ='';
+	   }
+	   
+
+			
+	
+	setInterval(checkScroll,50);
+	
+	function checkScroll(){
+		
+		_wrapperTranslate=swiper.getWrapperTranslate()
+		
+		for(i=0;i<anis.length;i++){
+			if(anis[i].offsetTop<(-_wrapperTranslate+swiper.height-50) && anis[i].style.visibility =='hidden'){
+				anis[i].style.visibility ='visible';
+				anis[i].className = "" + anis[i].classCache + " " + 'animated';
+				
+				}
+			}
+		
+		}
+	</script>	
+</body>
+</html>
